@@ -9,10 +9,12 @@ class IOuringSetup {
         loadLibrary("io_uring_kotlin")
     }
 
-    external fun ioUringInit(): Int
+    external fun ioUringQueueInit(): Int
 }
 
 
 fun main(args: Array<String>) {
-    IOuringSetup().ioUringInit()
+    val result = IOuringSetup().ioUringQueueInit()
+
+    println(result)
 }

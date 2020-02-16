@@ -9,10 +9,10 @@ extern "C" {
 #endif
 /*
  * Class:     iouring_IOuringSetup
- * Method:    ioUringInit
+ * Method:    ioUringQueueInit
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_iouring_IOuringSetup_ioUringInit
+JNIEXPORT jint JNICALL Java_iouring_IOuringSetup_ioUringQueueInit
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus

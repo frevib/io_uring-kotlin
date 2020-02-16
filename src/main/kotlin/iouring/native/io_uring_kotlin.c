@@ -8,7 +8,7 @@
 //}
 
 
-JNIEXPORT jint JNICALL Java_iouring_IOuringSetup_ioUringInit (JNIEnv * env, jobject obj)
+JNIEXPORT jint JNICALL Java_iouring_IOuringSetup_ioUringQueueInit (JNIEnv * env, jobject obj)
 {
     printf("starting ui_uring setup...\n");
     struct io_uring ring;

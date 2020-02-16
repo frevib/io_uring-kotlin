@@ -9,7 +9,7 @@ internal class IOuringSetupTest {
 
     @Test
     fun ioUringInit() {
-        val ioUringSetup = IOuringSetup().ioUringInit()
+        val ioUringSetup = IOuringSetup().ioUringQueueInit()
         Assertions.assertEquals(0, ioUringSetup)
 
 //        Assertions.assertEquals()
