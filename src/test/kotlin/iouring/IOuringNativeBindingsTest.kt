@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 
-internal class IOuringSetupTest {
+internal class IOuringNativeBindingsTest {
 
 
     @Test
-    fun ioUringInit() {
-        val ioUringSetup = IOuringSetup().ioUringQueueInit()
+    fun ioUringQueueInit() {
+        val ioUringSetup = IOuringNativeBindings().ioUringQueueInit()
         Assertions.assertEquals(0, ioUringSetup)
 
 //        Assertions.assertEquals()

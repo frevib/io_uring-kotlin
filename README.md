@@ -2,12 +2,12 @@
 
 ### needed
 * jdk8, or one that includes the command line tool`javah`
-* Kotlin compiler; `kotlinc-jvm`
+* Kotlin compiler: `kotlinc-jvm`
 * liburing: https://github.com/axboe/liburing (install with `sudo make install`)
 
 
 ### generate C header files
-from kotlin/ directory:
+run the following __from kotlin/ directory:__
 
 * Compile the .kt file to a class, so we can later use `javah` on it:
 `kotlinc-jvm iouring/IOuringSetup.kt`
@@ -15,7 +15,7 @@ from kotlin/ directory:
 * Generate C header files:
 `javah -o iouring/native/IOuringSetup.h iouring.IOuringSetup`
 
-* Compile JNI files from `kotlin/` dir:
+* Compile JNI files from:
 `gcc -fPIC iouring/native/io_uring_kotlin.c -shared -o iouring/native/libio_uring_kotlin.so -I $JAVA_HOME/include/ -I $JAVA_HOME/include/linux/ -Wall -O2 -D_GNU_SOURCE -luring`
 
 * Compile the .kt file to a JAR:
