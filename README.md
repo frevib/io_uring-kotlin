@@ -7,7 +7,7 @@
 
 
 ### generate C header files
-run the following __from kotlin/ directory:__
+Run the following __from kotlin/ directory:__
 
 * Compile the .kt file to a class, so we can later use `javah` on it:
 `kotlinc-jvm iouring/IOuringSetup.kt`
@@ -19,8 +19,8 @@ run the following __from kotlin/ directory:__
 `gcc -fPIC iouring/native/io_uring_kotlin.c -shared -o iouring/native/libio_uring_kotlin.so -I $JAVA_HOME/include/ -I $JAVA_HOME/include/linux/ -Wall -O2 -D_GNU_SOURCE -luring`
 
 * Compile the .kt file to a JAR:
-`kotlinc-jvm -include-runtime iouring/IOuringSetup.kt -d iouring/IOuringSetup.jar`
+`kotlinc-jvm . -include-runtime -d iouring/IOuringNativeBindings.jar`
 
 * Run: 
-`java -jar -Djava.library.path=./iouring/native iouring/IOuringSetup.jar`
+`java -jar -Djava.library.path=iouring/native/ iouring/IOuringNativeBindings.jar 1337`
 

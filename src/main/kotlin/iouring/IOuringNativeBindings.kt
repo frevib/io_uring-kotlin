@@ -1,12 +1,12 @@
 package iouring
 
-//import iouring.util.LibraryLoader
+import iouring.util.LibraryLoader
+
 
 class IOuringNativeBindings {
 
     init {
-//        LibraryLoader.loadLibrary("io_uring_kotlin")
-        System.loadLibrary("io_uring_kotlin")
+        LibraryLoader.loadLibrary("io_uring_kotlin")
     }
 
     external fun ioUringQueueInit(): Int
