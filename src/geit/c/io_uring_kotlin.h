@@ -12,8 +12,16 @@ extern "C" {
  * Method:    ioUringQueueInit
  * Signature: ()I
  */
-JNIEXPORT jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInit
-  (JNIEnv *, jobject);
+//JNIEXPORT jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInit
+//  (JNIEnv *, jobject);
+
+/*
+ * Class:     iouring_IOuringNativeBindings
+ * Method:    ioUringQueueInitParams
+ * Signature: (I)I
+ */
+JNIEXPORT jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams
+  (JNIEnv *, jobject, jint);
 
 #ifdef __cplusplus
 }
