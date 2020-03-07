@@ -5,7 +5,7 @@
 //#include "../headers/io_uring_kotlin.h"
 
 
-static jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInit (JNIEnv * env, jobject obj, jint ring_size)
+jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInit (JNIEnv * env, jobject obj, jint ring_size)
 {
     struct io_uring ring;
     int result = io_uring_queue_init(ring_size, &ring, 0);
@@ -19,7 +19,7 @@ static jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInit (JNIEnv 
 };
 
 
-static jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams (JNIEnv * env, jobject obj, jint ring_size)
+jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams (JNIEnv * env, jobject obj, jint ring_size)
 {
     struct io_uring ring;
     struct io_uring_params params;
@@ -35,7 +35,7 @@ static jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams (J
     return result;
 }
 
-static jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams_1IORING_1FEAT_1FAST_1POLL (JNIEnv * env, jobject obj, jint ring_size)
+jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams_1IORING_1FEAT_1FAST_1POLL (JNIEnv * env, jobject obj, jint ring_size)
 {
     struct io_uring ring;
     struct io_uring_params params;

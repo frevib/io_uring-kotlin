@@ -17,7 +17,7 @@ internal class IOuringNativeBindingsTest {
     @Test
     fun ioUringQueueInitWithParams_failed_negative_ring_size() {
         val retValue = IOuringNativeBindings().ioUringQueueInitParams(-1)
-        assertEquals(-1, retValue)
+        assertEquals(-1, retValue, "expect to be -1")
     }
 
     @Test
