@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <liburing.h>
-#include "io_uring_kotlin.h"
+//#include "../headers/io_uring_kotlin.h"
+#include <string.h>
+#include <jni.h>
 
 //JNIEXPORT void JNICALL Java_____(JNIEnv *env, jobject obj) {
 //  printf("Addcrack World!\n");
@@ -23,9 +25,8 @@
 //};
 
 
-JNIEXPORT jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams (JNIEnv * env, jobject obj, jint number)
+jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams (JNIEnv * env, jobject obj, jint number)
 {
-    printf("init ...%d\n", number);
     struct io_uring ring;
     int result = io_uring_queue_init(32, &ring, 0);
     if (result < 0)

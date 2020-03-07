@@ -1,7 +1,7 @@
 # io_uring Kotlin bindings
 
-### needed
-* jdk8, or one that includes the command line tool`javah`
+### requirements
+* __JDK8__, or one that includes the command line tool`javah`
 * Kotlin compiler: `kotlinc-jvm`
 * liburing: https://github.com/axboe/liburing (install with `sudo make install`)
 

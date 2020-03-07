@@ -25,7 +25,7 @@ compileTestKotlin {
 
 test {
     useJUnitPlatform()
-    systemProperty "java.library.path", file("${buildDir}/libs/geit/shared").absolutePath
+    systemProperty "java.library.path", file("${buildDir}/libs/iouring/shared").absolutePath
 }
 
 model {
@@ -36,24 +36,32 @@ model {
     }
 
     components {
-        geit(NativeLibrarySpec) {
+        iouring(NativeLibrarySpec) {
+            sources {
+                c {
+                    source {
+                        srcDir "src/main/kotlin/iouring/native/c"
+                        include "**/*.c"
+                    }
+                    exportedHeaders {
+                        srcDir "src/main/kotlin/iouring/native/headers"
+                    }
+                }
+            }
+
             binaries.all {
+
                 if (targetPlatform.operatingSystem.macOsX) {
                     cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
                     cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/darwin"
                     cCompiler.args '-mmacosx-version-min=10.4'
                     linker.args '-mmacosx-version-min=10.4'
                 } else if (targetPlatform.operatingSystem.linux) {
+                    cCompiler.args '-fPIC'
                     cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
                     cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/linux"
-
-                    cCompiler.args '-I', "-fPIC"
-                    cCompiler.args '-I', "-O2"
-                    cCompiler.args '-I', "-shared"
-                    cCompiler.args '-I', "-D_GNU_SOURCE"
-                    cCompiler.args '-I', "-luring"
-
                     cCompiler.args '-D_FILE_OFFSET_BITS=64'
+                    linker.args '-luring'
                 } else if (targetPlatform.operatingSystem.windows) {
                     cCompiler.args "-I${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
                     cCompiler.args "-I${org.gradle.internal.jvm.Jvm.current().javaHome}/include/win32"
@@ -63,20 +71,8 @@ model {
                     cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/freebsd"
                 }
             }
-
-            sources {
-                c {
-                    source {
-                        srcDir "src/geit/c"
-                        include "**/*.c"
-                    }
-                    exportedHeaders {
-                        srcDir "src/geit/c"
-                    }
-                }
-            }
         }
     }
 }
 
-test.dependsOn  'geitSharedLibrary'
+test.dependsOn  'iouringSharedLibrary'
