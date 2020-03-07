@@ -1,38 +1,56 @@
 #include <stdio.h>
 #include <liburing.h>
-//#include "../headers/io_uring_kotlin.h"
 #include <string.h>
 #include <jni.h>
-
-//JNIEXPORT void JNICALL Java_____(JNIEnv *env, jobject obj) {
-//  printf("Addcrack World!\n");
-//  return;
-//}
+//#include "../headers/io_uring_kotlin.h"
 
 
-//JNIEXPORT jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInit (JNIEnv * env, jobject obj)
-//{
-//    printf("starting ui_uring setup...\n");
-//    struct io_uring ring;
-//    int result = io_uring_queue_init(32, &ring, 0);
-//    if (result < 0)
-//    {
-//    	printf("queue_init: %d\n", result);
-//    	return -1;
-//    }
-//
-//    return result;
-//};
-
-
-jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams (JNIEnv * env, jobject obj, jint number)
+JNIEXPORT jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInit (JNIEnv * env, jobject obj, jint ring_size)
 {
     struct io_uring ring;
-    int result = io_uring_queue_init(32, &ring, 0);
+    int result = io_uring_queue_init(ring_size, &ring, 0);
     if (result < 0)
     {
-    	printf("queue_init: %d\n", result);
+    	fprintf(stderr, "Failed to execute io_uring_queue_init(), returned: %d\n", result);
     	return -1;
+    }
+
+    return result;
+};
+
+
+jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams (JNIEnv * env, jobject obj, jint ring_size)
+{
+    struct io_uring ring;
+    struct io_uring_params params;
+    memset(&params, 0, sizeof(params));
+
+    int result = io_uring_queue_init_params(ring_size, &ring, &params);
+    if (result < 0)
+    {
+    	fprintf(stderr, "Failed to execute io_uring_queue_init_params(), returned: %d\n", result);
+    	return -1;
+    }
+
+    return result;
+}
+
+jint JNICALL Java_iouring_IOuringNativeBindings_ioUringQueueInitParams_1IORING_1FEAT_1FAST_1POLL (JNIEnv * env, jobject obj, jint ring_size)
+{
+    struct io_uring ring;
+    struct io_uring_params params;
+    memset(&params, 0, sizeof(params));
+
+    int result = io_uring_queue_init_params(ring_size, &ring, &params);
+    if (result < 0)
+    {
+    	fprintf(stderr, "Failed to execute io_uring_queue_init_params(), returned: %d\n", result);
+    	return -1;
+    }
+    if (!(params.features & IORING_FEAT_FAST_POLL))
+    {
+        fprintf(stderr, "IORING_FEAT_FAST_POLL not available in the kernel, quiting...\n");
+        return 0;
     }
 
     return result;

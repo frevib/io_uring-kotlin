@@ -25,8 +25,22 @@ compileTestKotlin {
 
 test {
     useJUnitPlatform()
+//    junitPlatform {
+//        details 'verbose'
+//    }
+
+    // Always run tests, even when nothing changed.
+    dependsOn 'cleanTest'
+
+    // Show test results.
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+
     systemProperty "java.library.path", file("${buildDir}/libs/iouring/shared").absolutePath
 }
+
+
 
 model {
     platforms {
@@ -50,7 +64,6 @@ model {
             }
 
             binaries.all {
-
                 if (targetPlatform.operatingSystem.macOsX) {
                     cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
                     cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/darwin"

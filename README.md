@@ -5,8 +5,11 @@
 * Kotlin compiler: `kotlinc-jvm`
 * liburing: https://github.com/axboe/liburing (install with `sudo make install`)
 
+### Run tests
+`./gradlew test`
 
-### generate C header files
+
+#### Compile manually
 Run the following __from kotlin/ directory:__
 
 * Compile the .kt file to a class, so we can later use `javah` on it:
